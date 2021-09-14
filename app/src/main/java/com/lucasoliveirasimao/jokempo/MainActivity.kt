@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Toast
+import android.view.View
 import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var disapper: Animation = AlphaAnimation(1.0F,0.0F)
+    private var appear: Animation = AlphaAnimation(0.0F, 1.0F)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,9 +20,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         disapper.duration = 1500
+        appear.duration = 250
 
         binding.ivPlayer1.setOnClickListener { binding.ivPlayer1.startAnimation(disapper) }
-        binding.ivPlayer2.setOnClickListener { click("Player 2") }
+        binding.ivPlayer2.setOnClickListener { binding.ivPlayer2.startAnimation(appear) }
 
         binding.ivStone.setOnClickListener { click("Stone") }
         binding.ivScissors.setOnClickListener { click("Scissors") }
@@ -41,8 +44,23 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        appear.setAnimationListener(object : Animation.AnimationListener {
+
+            override fun onAnimationStart(p0: Animation?) {
+                binding.ivPlayer2.visibility = View.INVISIBLE
+            }
+
+            override fun onAnimationRepeat(p0: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                binding.ivPlayer2.visibility = View.VISIBLE
+            }
+
+        })
+
     }
-    //TODO: criar a animação de sumir
 
     //TODO: criar a animação de aparecer
 
