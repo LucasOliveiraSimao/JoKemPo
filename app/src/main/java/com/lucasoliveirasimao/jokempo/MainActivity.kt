@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         binding.ivPlayer1.setOnClickListener { binding.ivPlayer1.startAnimation(disapper) }
         binding.ivPlayer2.setOnClickListener { binding.ivPlayer2.startAnimation(appear) }
 
-        binding.ivStone.setOnClickListener { click("Stone") }
-        binding.ivScissors.setOnClickListener { click("Scissors") }
-        binding.ivPaper.setOnClickListener { click("Paper") }
+        binding.ivStone.setOnClickListener { click(binding.ivStone) }
+        binding.ivScissors.setOnClickListener { click(binding.ivScissors) }
+        binding.ivPaper.setOnClickListener { click(binding.ivPaper) }
 
         disapper.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
@@ -75,8 +75,20 @@ class MainActivity : AppCompatActivity() {
         media.start()
     }
 
-    private fun click(msg: String) {
-        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+    private fun click(view: View) {
+        playMusic()
+
+        binding.ivPlayer1.scaleX = -1.0F
+
+        when(view.id){
+            R.id.iv_stone -> binding.ivPlayer1.setImageResource(R.drawable.stone)
+            R.id.iv_paper -> binding.ivPlayer1.setImageResource(R.drawable.paper)
+            R.id.iv_scissors -> binding.ivPlayer1.setImageResource(R.drawable.scissors)
+        }
+
+        binding.ivPlayer2.startAnimation(disapper)
+        binding.ivPlayer2.setImageResource(R.drawable.query)
+
     }
 
 }
