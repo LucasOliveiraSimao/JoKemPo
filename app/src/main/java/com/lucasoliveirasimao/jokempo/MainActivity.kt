@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.widget.Toast
 import android.view.View
 import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         appear.setAnimationListener(object : Animation.AnimationListener {
 
             override fun onAnimationStart(p0: Animation?) {
+                drawEnemyGame()
                 binding.ivPlayer2.visibility = View.INVISIBLE
             }
 
@@ -68,7 +70,18 @@ class MainActivity : AppCompatActivity() {
 
     //TODO: criar a função de verifica a jogada
 
-    //TODO: criar a função de sortear a jogada
+
+
+    private fun drawEnemyGame(){
+        var random: Random
+        var numRandom: Int = random.nextInt(3)
+
+        when(numRandom){
+            0 -> binding.ivPlayer2.setImageResource(R.drawable.stone)
+            1 -> binding.ivPlayer2.setImageResource(R.drawable.paper)
+            2 -> binding.ivPlayer2.setImageResource(R.drawable.scissors)
+        }
+    }
 
     private fun playMusic(){
         media = MediaPlayer.create(baseContext, R.raw.alex_play)
