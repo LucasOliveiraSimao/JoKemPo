@@ -2,24 +2,44 @@ package com.lucasoliveirasimao.jokempo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.Toast
 import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private var disapper: Animation = AlphaAnimation(1.0F,0.0F)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.ivPlayer1.setOnClickListener { click("Player 1") }
+        disapper.duration = 1500
+
+        binding.ivPlayer1.setOnClickListener { binding.ivPlayer1.startAnimation(disapper) }
         binding.ivPlayer2.setOnClickListener { click("Player 2") }
 
         binding.ivStone.setOnClickListener { click("Stone") }
         binding.ivScissors.setOnClickListener { click("Scissors") }
         binding.ivPaper.setOnClickListener { click("Paper") }
+
+        disapper.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(p0: Animation?) {
+                binding.ivPlayer1.visibility = View.INVISIBLE
+            }
+
+            override fun onAnimationRepeat(p0: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                binding.ivPlayer1.visibility = View.VISIBLE
+            }
+
+        })
 
     }
     //TODO: criar a animação de sumir
