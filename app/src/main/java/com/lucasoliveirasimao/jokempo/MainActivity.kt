@@ -1,5 +1,6 @@
 package com.lucasoliveirasimao.jokempo
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AlphaAnimation
@@ -13,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     private var disapper: Animation = AlphaAnimation(1.0F,0.0F)
     private var appear: Animation = AlphaAnimation(0.0F, 1.0F)
+
+    private lateinit var media: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         disapper.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
                 binding.ivPlayer1.visibility = View.INVISIBLE
+                playMusic()
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAnimationStart(p0: Animation?) {
                 binding.ivPlayer2.visibility = View.INVISIBLE
+                playMusic()
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -61,14 +66,15 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
-    //TODO: criar a animação de aparecer
-
-    //TODO: criar a função de tocar som
-
+    
     //TODO: criar a função de verifica a jogada
 
     //TODO: criar a função de sortear a jogada
+
+    private fun playMusic(){
+        media = MediaPlayer.create(baseContext, R.raw.alex_play)
+        media.start()
+    }
 
     private fun click(msg: String) {
         Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
