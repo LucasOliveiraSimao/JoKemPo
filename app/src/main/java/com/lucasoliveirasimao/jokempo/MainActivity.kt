@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         disapper.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
-                binding.ivPlayer1.visibility = View.INVISIBLE
-                playMusic()
+                binding.ivPlayer2.visibility = View.INVISIBLE
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -43,7 +42,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAnimationEnd(p0: Animation?) {
-                binding.ivPlayer1.visibility = View.VISIBLE
+                binding.ivPlayer2.visibility = View.INVISIBLE
+                binding.ivPlayer2.startAnimation(appear)
             }
 
         })
@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAnimationStart(p0: Animation?) {
                 binding.ivPlayer2.visibility = View.INVISIBLE
-                playMusic()
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-    
+
     //TODO: criar a função de verifica a jogada
 
     //TODO: criar a função de sortear a jogada
