@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var media: MediaPlayer
 
-    private var played1: Int = 0
-    private var played2: Int = 0
+    private var userMove: Int = 0
+    private var opponentMove: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    val win: Boolean = (played1 == 1 && played2 == 3) || (played1 == 2 && played2 == 1) || (played1 == 3 && played2 == 2)
-    val lose: Boolean = (played2 == 1 && played1 == 3) || (played2 == 2 && played1 == 1) || (played2 == 3 && played1 == 2)
-    val draw: Boolean = (played1 == played2)
+    val win: Boolean = (userMove == 1 && opponentMove == 3) || (userMove == 2 && opponentMove == 1) || (userMove == 3 && opponentMove == 2)
+    val lose: Boolean = (opponentMove == 1 && userMove == 3) || (opponentMove == 2 && userMove == 1) || (opponentMove == 3 && userMove == 2)
+    val draw: Boolean = (userMove == opponentMove)
 
     private fun checkPlay() {
         if (draw) {
@@ -95,15 +95,15 @@ class MainActivity : AppCompatActivity() {
         when ((0..2).random()) {
             0 -> {
                 binding.ivPlayer2.setImageResource(R.drawable.stone)
-                played2 = 1
+                opponentMove = 1
             }
             1 -> {
                 binding.ivPlayer2.setImageResource(R.drawable.paper)
-                played2 = 2
+                opponentMove = 2
             }
             2 -> {
                 binding.ivPlayer2.setImageResource(R.drawable.scissors)
-                played2 = 3
+                opponentMove = 3
             }
         }
     }
@@ -121,17 +121,17 @@ class MainActivity : AppCompatActivity() {
         when (view.id) {
             R.id.iv_stone -> {
                 binding.ivPlayer1.setImageResource(R.drawable.stone)
-                played1 = 1
+                userMove = 1
             }
 
             R.id.iv_paper -> {
                 binding.ivPlayer1.setImageResource(R.drawable.paper)
-                played1 = 2
+                userMove = 2
             }
 
             R.id.iv_scissors -> {
                 binding.ivPlayer1.setImageResource(R.drawable.scissors)
-                played1 = 3
+                userMove = 3
             }
         }
 
