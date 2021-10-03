@@ -1,14 +1,15 @@
 package com.lucasoliveirasimao.jokempo
 
+import android.graphics.Color
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Toast
 import android.view.View
+import android.widget.TextView
 import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
 
 const val DURATION_DISAPPER: Long = 1500
@@ -130,23 +131,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun message(message: Int){
+        val toast =Toast.makeText(this, message, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER,0,0)
+
+        val toastView = toast.view
+        toastView?.setBackgroundResource(R.drawable.bg_toast)
+
+        val toastMessage = toast.view?.findViewById<TextView>(android.R.id.message)
+        toastMessage?.setTextColor(Color.parseColor("#FFFFFF"))
+        toast.show()
+
+    }
+
     private fun checkPlay() {
         if ((userMove == ID_STONE && opponentMove == ID_SCISSORS) ||
             (userMove == ID_PAPER && opponentMove == ID_STONE) ||
             (userMove == ID_SCISSORS && opponentMove == ID_PAPER)
         ) {
 
-            Toast.makeText(this, R.string.win, Toast.LENGTH_SHORT).show().setGravity(Gravity.CENTER,0,0)
+            message(R.string.win)
 
         } else if ((opponentMove == ID_STONE && userMove == ID_SCISSORS) ||
             (opponentMove == ID_PAPER && userMove == ID_STONE) ||
             (opponentMove == ID_SCISSORS && userMove == ID_PAPER)
         ) {
 
-            Toast.makeText(this, R.string.lose, Toast.LENGTH_SHORT).show()
+            message(R.string.lose)
 
         } else {
-            Toast.makeText(this, R.string.draw, Toast.LENGTH_SHORT).show()
+            message(R.string.draw)
         }
 
     }
