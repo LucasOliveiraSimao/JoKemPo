@@ -12,6 +12,9 @@ import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
 const val DURATION_DISAPPER: Long = 1500
 const val DURATION_APPEAR: Long = 250
 
+const val VISIBLE: Int = View.VISIBLE
+const val INVISIBLE: Int = View.INVISIBLE
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         disapper.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {
-                binding.ivPlayer2.visibility = View.INVISIBLE
+                binding.ivPlayer2.visibility = INVISIBLE
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAnimationEnd(p0: Animation?) {
-                binding.ivPlayer2.visibility = View.INVISIBLE
+                binding.ivPlayer2.visibility = INVISIBLE
                 binding.ivPlayer2.startAnimation(appear)
             }
 
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAnimationStart(p0: Animation?) {
                 drawEnemyGame()
-                binding.ivPlayer2.visibility = View.INVISIBLE
+                binding.ivPlayer2.visibility = INVISIBLE
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
@@ -64,21 +67,25 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(p0: Animation?) {
                 checkPlay()
-                binding.ivPlayer2.visibility = View.VISIBLE
+                binding.ivPlayer2.visibility = VISIBLE
             }
 
         })
 
     }
 
+    val win: Boolean = (played1 == 1 && played2 == 3) || (played1 == 2 && played2 == 1) || (played1 == 3 && played2 == 2)
+    val lose: Boolean = (played2 == 1 && played1 == 3) || (played2 == 2 && played1 == 1) || (played2 == 3 && played1 == 2)
+    val draw: Boolean = (played1 == played2)
+
     private fun checkPlay() {
-        if (played1 == played2) {
+        if (draw) {
             Toast.makeText(this, "Empate!", Toast.LENGTH_SHORT).show()
         }
-        if ((played1 == 1 && played2 == 3) || (played1 == 2 && played2 == 1) || (played1 == 3 && played2 == 2)) {
+        if (win) {
             Toast.makeText(this, "Ganhei!", Toast.LENGTH_SHORT).show()
         }
-        if ((played2 == 1 && played1 == 3) || (played2 == 2 && played1 == 1) || (played2 == 3 && played1 == 2)) {
+        if (lose) {
             Toast.makeText(this, "Perdi!", Toast.LENGTH_SHORT).show()
         }
     }
