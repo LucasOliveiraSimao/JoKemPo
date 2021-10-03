@@ -3,6 +3,8 @@ package com.lucasoliveirasimao.jokempo
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Toast
@@ -14,6 +16,10 @@ const val DURATION_APPEAR: Long = 250
 
 const val VISIBLE: Int = View.VISIBLE
 const val INVISIBLE: Int = View.INVISIBLE
+
+const val ID_STONE: Int = 1
+const val ID_PAPER: Int = 2
+const val ID_SCISSORS: Int = 3
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -74,40 +80,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    val win: Boolean = (userMove == 1 && opponentMove == 3) || (userMove == 2 && opponentMove == 1) || (userMove == 3 && opponentMove == 2)
-    val lose: Boolean = (opponentMove == 1 && userMove == 3) || (opponentMove == 2 && userMove == 1) || (opponentMove == 3 && userMove == 2)
-    val draw: Boolean = (userMove == opponentMove)
-
-    private fun checkPlay() {
-        if (draw) {
-            Toast.makeText(this, R.string.draw, Toast.LENGTH_SHORT).show()
-        }
-        if (win) {
-            Toast.makeText(this, R.string.win, Toast.LENGTH_SHORT).show()
-        }
-        if (lose) {
-            Toast.makeText(this, R.string.lose, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun drawEnemyGame() {
-
-        when ((0..2).random()) {
-            0 -> {
-                binding.ivPlayer2.setImageResource(R.drawable.stone)
-                opponentMove = 1
-            }
-            1 -> {
-                binding.ivPlayer2.setImageResource(R.drawable.paper)
-                opponentMove = 2
-            }
-            2 -> {
-                binding.ivPlayer2.setImageResource(R.drawable.scissors)
-                opponentMove = 3
-            }
-        }
-    }
-
     private fun playMusic() {
         media = MediaPlayer.create(baseContext, R.raw.alex_play)
         media.start()
@@ -121,22 +93,61 @@ class MainActivity : AppCompatActivity() {
         when (view.id) {
             R.id.iv_stone -> {
                 binding.ivPlayer1.setImageResource(R.drawable.stone)
-                userMove = 1
+                userMove = ID_STONE
             }
 
             R.id.iv_paper -> {
                 binding.ivPlayer1.setImageResource(R.drawable.paper)
-                userMove = 2
+                userMove = ID_PAPER
             }
 
             R.id.iv_scissors -> {
                 binding.ivPlayer1.setImageResource(R.drawable.scissors)
-                userMove = 3
+                userMove = ID_SCISSORS
             }
         }
 
         binding.ivPlayer2.startAnimation(disapper)
         binding.ivPlayer2.setImageResource(R.drawable.query)
+
+    }
+
+    private fun drawEnemyGame() {
+
+        when ((0..2).random()) {
+            0 -> {
+                binding.ivPlayer2.setImageResource(R.drawable.stone)
+                opponentMove = ID_STONE
+            }
+            1 -> {
+                binding.ivPlayer2.setImageResource(R.drawable.paper)
+                opponentMove = ID_PAPER
+            }
+            2 -> {
+                binding.ivPlayer2.setImageResource(R.drawable.scissors)
+                opponentMove = ID_SCISSORS
+            }
+        }
+    }
+
+    private fun checkPlay() {
+        if ((userMove == ID_STONE && opponentMove == ID_SCISSORS) ||
+            (userMove == ID_PAPER && opponentMove == ID_STONE) ||
+            (userMove == ID_SCISSORS && opponentMove == ID_PAPER)
+        ) {
+
+            Toast.makeText(this, R.string.win, Toast.LENGTH_SHORT).show().setGravity(Gravity.CENTER,0,0)
+
+        } else if ((opponentMove == ID_STONE && userMove == ID_SCISSORS) ||
+            (opponentMove == ID_PAPER && userMove == ID_STONE) ||
+            (opponentMove == ID_SCISSORS && userMove == ID_PAPER)
+        ) {
+
+            Toast.makeText(this, R.string.lose, Toast.LENGTH_SHORT).show()
+
+        } else {
+            Toast.makeText(this, R.string.draw, Toast.LENGTH_SHORT).show()
+        }
 
     }
 
