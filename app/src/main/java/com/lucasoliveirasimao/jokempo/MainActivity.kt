@@ -80,13 +80,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkPlay() {
         if (draw) {
-            Toast.makeText(this, "Empate!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.draw, Toast.LENGTH_SHORT).show()
         }
         if (win) {
-            Toast.makeText(this, "Ganhei!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.win, Toast.LENGTH_SHORT).show()
         }
         if (lose) {
-            Toast.makeText(this, "Perdi!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.lose, Toast.LENGTH_SHORT).show()
         }
     }
 

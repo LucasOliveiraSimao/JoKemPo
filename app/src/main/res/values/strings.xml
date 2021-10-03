@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JoKemPo</string>
+
+    <string name="win">Ganhou</string>
+    <string name="lose">Perdeu</string>
+    <string name="draw">Empatou</string>
 </resources>
