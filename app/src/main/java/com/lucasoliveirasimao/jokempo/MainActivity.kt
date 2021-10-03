@@ -9,6 +9,9 @@ import android.widget.Toast
 import android.view.View
 import com.lucasoliveirasimao.jokempo.databinding.ActivityMainBinding
 
+const val DURATION_DISAPPER: Long = 1500
+const val DURATION_APPEAR: Long = 250
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -25,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        disapper.duration = 1500
-        appear.duration = 250
+        disapper.duration = DURATION_DISAPPER
+        appear.duration = DURATION_APPEAR
 
         binding.ivPlayer1.setOnClickListener { binding.ivPlayer1.startAnimation(disapper) }
         binding.ivPlayer2.setOnClickListener { binding.ivPlayer2.startAnimation(appear) }
