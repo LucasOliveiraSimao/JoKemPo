@@ -22,7 +22,7 @@ const val ID_STONE: Int = 1
 const val ID_PAPER: Int = 2
 const val ID_SCISSORS: Int = 3
 
-const val RANDOM_NUMBERS: IntRange = 0..2
+val RANDOM_NUMBERS: IntRange = 0..2
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -133,9 +133,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun message(message: Int){
-        val toast =Toast.makeText(this, message, Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.CENTER,0,0)
+    private fun message(message: Int) {
+        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.CENTER, 0, 0)
 
         val toastView = toast.view
         toastView?.setBackgroundResource(R.drawable.bg_toast)
