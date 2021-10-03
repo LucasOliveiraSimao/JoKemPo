@@ -31,9 +31,6 @@ class MainActivity : AppCompatActivity() {
         disapper.duration = DURATION_DISAPPER
         appear.duration = DURATION_APPEAR
 
-        binding.ivPlayer1.setOnClickListener { binding.ivPlayer1.startAnimation(disapper) }
-        binding.ivPlayer2.setOnClickListener { binding.ivPlayer2.startAnimation(appear) }
-
         binding.ivStone.setOnClickListener { click(binding.ivStone) }
         binding.ivScissors.setOnClickListener { click(binding.ivScissors) }
         binding.ivPaper.setOnClickListener { click(binding.ivPaper) }
