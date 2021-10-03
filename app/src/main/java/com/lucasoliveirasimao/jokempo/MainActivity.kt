@@ -22,6 +22,8 @@ const val ID_STONE: Int = 1
 const val ID_PAPER: Int = 2
 const val ID_SCISSORS: Int = 3
 
+const val RANDOM_NUMBERS: IntRange = 0..2
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -115,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun drawEnemyGame() {
 
-        when ((0..2).random()) {
+        when ((RANDOM_NUMBERS).random()) {
             0 -> {
                 binding.ivPlayer2.setImageResource(R.drawable.stone)
                 opponentMove = ID_STONE
